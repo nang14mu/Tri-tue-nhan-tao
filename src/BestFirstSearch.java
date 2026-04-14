@@ -12,6 +12,12 @@ public class BestFirstSearch {
         open.offer(startNode);
         parent.put(start, null);
 
+        String initialExpanded = "-";
+        String initialNext = "-";
+        String initialL = startNode.toString();
+
+        steps.add(new StepRecord(initialExpanded, initialNext, initialL));
+
         while (!open.isEmpty()) {
             Node current = open.poll();
 
@@ -37,11 +43,12 @@ public class BestFirstSearch {
             String nextState = generated.isEmpty() ? " - " : String.join(", ", generated);
             String listL = formatOpenList(open, closed);
 
-            steps.add(new StepRecord(expandedState, nextState, listL));
-
             if(current.getName().equals(goal)) {
+                steps.add(new StepRecord(expandedState, "TTKT-DUNG", "-"));
                 return new SearchResult(reconstructPath(parent, goal), steps);
             }
+
+            steps.add(new StepRecord(expandedState, nextState, listL));
         }
 
         return new SearchResult(Collections.emptyList(), steps);

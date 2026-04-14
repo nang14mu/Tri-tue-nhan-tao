@@ -13,8 +13,7 @@ public class Main {
                     inputData.getGoal());
 
             TablePrinter printer = new TablePrinter();
-            printer.printSteps(result.getSteps());
-            printer.printPath(result.getPath());
+            printer.printToFile(result.getSteps(), result.getPath(), "output.txt");
 
         } catch (Exception e) {
             System.out.println("Fault: " + e.getMessage());
